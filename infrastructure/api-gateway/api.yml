@@ -1,0 +1,143 @@
+openapi: 3.0.3
+info:
+  title: Unit Trust API
+  version: 0.1.0
+  description: "<p>This is OpenAPI specification document for Unit Trust Portal</p>"
+paths:
+  /customers/{id}:
+    get:
+      operationId: customerDetails
+      description: Get Details of a specific customer
+      parameters:
+        - $ref: "#/components/parameters/id"
+      x-amazon-apigateway-integration:
+        uri: ${customer_service}
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "AWS_PROXY"
+      x-amazon-apigateway-auth:
+        type: "NONE"
+    options:
+      responses:
+        200:
+          $ref: "#/components/responses/cors"
+        400:
+          $ref: "#/components/responses/cors"
+        500:
+          $ref: "#/components/responses/cors"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,HEAD,GET,POST,PUT,PATCH,DELETE'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        requestTemplates:
+          application/json: '{ "statusCode": 200 }'
+        type: "mock"
+  /orders/{id}:
+    post:
+      operationId: createOrder
+      description: creating a new order
+      parameters:
+        - $ref: "#/components/parameters/id"
+      x-amazon-apigateway-integration:
+        uri: ${order_service}
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "AWS_PROXY"
+      x-amazon-apigateway-auth:
+        type: "NONE"
+    options:
+      responses:
+        200:
+          $ref: "#/components/responses/cors"
+        400:
+          $ref: "#/components/responses/cors"
+        500:
+          $ref: "#/components/responses/cors"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,HEAD,GET,POST,PUT,PATCH,DELETE'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        requestTemplates:
+          application/json: '{ "statusCode": 200 }'
+        type: "mock"
+  /orders/{id}:
+    get:
+      operationId: updateOrderStatus
+      description: creating a new order
+      parameters:
+        - $ref: "#/components/parameters/id"
+        - $ref: "#/components/parameters/status"
+      x-amazon-apigateway-integration:
+        uri: ${order_service}
+        passthroughBehavior: "when_no_match"
+        httpMethod: "POST"
+        type: "AWS_PROXY"
+      x-amazon-apigateway-auth:
+        type: "NONE"
+    options:
+      responses:
+        200:
+          $ref: "#/components/responses/cors"
+        400:
+          $ref: "#/components/responses/cors"
+        500:
+          $ref: "#/components/responses/cors"
+      x-amazon-apigateway-integration:
+        responses:
+          default:
+            statusCode: "200"
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'OPTIONS,HEAD,GET,POST,PUT,PATCH,DELETE'"
+              method.response.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        passthroughBehavior: "when_no_match"
+        requestTemplates:
+          application/json: '{ "statusCode": 200 }'
+        type: "mock"
+components:
+  parameters:
+    id:
+      description: identifier
+      in: path
+      name: id
+      schema:
+        type: string
+      required: true
+    status:
+      description: status
+      in: query
+      name: status
+      schema:
+        type: string
+      required: true
+  schemas:
+    Empty:
+      title: "Empty Schema"
+      type: "object"
+  responses:
+    cors:
+      description: "200 response"
+      headers:
+        Access-Control-Allow-Origin:
+          schema:
+            type: "string"
+        Access-Control-Allow-Methods:
+          schema:
+            type: "string"
+        Access-Control-Allow-Headers:
+          schema:
+            type: "string"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Empty"
