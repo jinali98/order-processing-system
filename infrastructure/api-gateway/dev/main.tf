@@ -10,7 +10,7 @@ terraform {
 
 provider "aws" {
   region  = var.region
-  profile = "jinali"
+  profile = var.profile
 
   default_tags {
     tags = {
