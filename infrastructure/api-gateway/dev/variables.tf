@@ -20,17 +20,17 @@ variable "retention_in_days" {
 }
 
 variable "prefix" {
-  description = ""
+  description = "the prefix of the environment"
   default     = "dev"
 
 }
 
 variable "region" {
-  description = "ap-south-1"
+  description = "this is the aws region"
   default     = "ap-south-1"
 }
 
 variable "profile" {
-  description = ""
+  description = "profile to use"
   default     = "jinali"
 }
