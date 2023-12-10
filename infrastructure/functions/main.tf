@@ -34,6 +34,16 @@ data "aws_api_gateway_rest_api" "rest_api" {
   name = "event-driven-ecom-system"
 }
 
+data "aws_iam_policy" "customer_service_lambda_managed_policy" {
+  name = "customer_service_lambda_managed_policy"
+}
+data "aws_iam_policy" "order_service_lambda_managed_policy" {
+  name = "order_service_lambda_managed_policy"
+}
+data "aws_iam_policy" "product_service_lambda_managed_policy" {
+  name = "product_service_lambda_managed_policy"
+}
+
 
 module "customer_service_lambda_function" {
   source                          = "../modules/function"
